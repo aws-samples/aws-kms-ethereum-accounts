@@ -70,5 +70,16 @@ class AwsKmsLambdaEthereumStack(core.Stack):
         cmk.grant(eth_client.lf, 'kms:GetPublicKey')
         cmk.grant(eth_client.lf, 'kms:Sign')
 
+        eth_client_eip1559 = EthLambda(self, "KmsClientEIP1559",
+                                       dir="aws_kms_lambda_ethereum/_lambda/functions/eth_client_eip1559",
+                                       env={"LOG_LEVEL": "DEBUG",
+                                            "KMS_KEY_ID": cmk.key_id,
+                                            "ETH_NETWORK": eth_network
+                                            }
+                                       )
+
+        cmk.grant(eth_client_eip1559.lf, 'kms:GetPublicKey')
+        cmk.grant(eth_client_eip1559.lf, 'kms:Sign')
+
         core.CfnOutput(self, 'KeyID', value=cmk.key_id,
                        description="KeyID of the KMS-CMK instance used as the Ethereum identity instance")

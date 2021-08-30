@@ -134,31 +134,40 @@ def find_eth_signature(params: EthKmsParams, plaintext: bytes) -> dict:
     return {'r': r, 's': s}
 
 
-def get_recovery_id(msg_hash, r, s, eth_checksum_addr) -> dict:
-    for v in [27, 28]:
-        recovered_addr = Account.recoverHash(message_hash=msg_hash,
-                                             vrs=(v, r, s))
+def get_recovery_id(msg_hash, r, s, eth_checksum_addr, chainid) -> dict:
+    # https://eips.ethereum.org/EIPS/eip-155
+    # calculate v according to EIP155 based on chainid parameter
+    # {0,1} + CHAIN_ID * 2 + 35
+    v_lower = chainid * 2 + 35
+    v_range = [v_lower, v_lower + 1]
+
+    for v in v_range:
+        recovered_addr = Account.recoverHash(message_hash=msg_hash, vrs=(v, r, s))
 
         if recovered_addr == eth_checksum_addr:
-            return {'recovered_addr': recovered_addr, 'v': v}
+            return {"recovered_addr": recovered_addr, "y_parity": v - v_lower}
 
     return {}
 
 
-def get_tx_params(dst_eth_addr: str, amount: int, nonce: int) -> dict:
+def get_tx_params(dst_address: str, amount: int, nonce: int,
+                  chainid: int, type: int, max_fee_per_gas: int, max_priority_fee_per_gas: int) -> dict:
     transaction = {
         'nonce': nonce,
-        'to': dst_eth_addr,
+        'to': dst_address,
         'value': w3.toWei(amount, 'ether'),
         'data': '0x00',
         'gas': 160000,
-        'gasPrice': '0x0918400000'
+        'maxFeePerGas': max_fee_per_gas,
+        'maxPriorityFeePerGas': max_priority_fee_per_gas,
+        'type': type,
+        'chainId': chainid,
     }
 
     return transaction
 
 
-def assemble_tx(tx_params: dict, params: EthKmsParams, eth_checksum_addr: str) -> bytes:
+def assemble_tx(tx_params: dict, params: EthKmsParams, eth_checksum_addr: str, chainid: int) -> (bytes, bytes):
     tx_unsigned = serializable_unsigned_transaction_from_dict(transaction_dict=tx_params)
     tx_hash = tx_unsigned.hash()
 
@@ -168,9 +177,13 @@ def assemble_tx(tx_params: dict, params: EthKmsParams, eth_checksum_addr: str) -
     tx_eth_recovered_pub_addr = get_recovery_id(msg_hash=tx_hash,
                                                 r=tx_sig['r'],
                                                 s=tx_sig['s'],
-                                                eth_checksum_addr=eth_checksum_addr)
+                                                eth_checksum_addr=eth_checksum_addr,
+                                                chainid=chainid)
 
     tx_encoded = encode_transaction(unsigned_transaction=tx_unsigned,
-                                    vrs=(tx_eth_recovered_pub_addr['v'], tx_sig['r'], tx_sig['s']))
+                                    vrs=(tx_eth_recovered_pub_addr['y_parity'], tx_sig['r'], tx_sig['s']))
 
-    return w3.toHex(tx_encoded)
+    tx_encoded_hex = w3.toHex(tx_encoded)
+    tx_hash = w3.keccak(hexstr=tx_encoded_hex).hex()
+
+    return tx_hash, tx_encoded_hex
