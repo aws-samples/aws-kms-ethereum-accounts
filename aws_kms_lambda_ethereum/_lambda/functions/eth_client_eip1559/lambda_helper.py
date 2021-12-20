@@ -32,7 +32,7 @@ class EthKmsParams:
         self._kms_key_id = kms_key_id
         self._eth_network = eth_network
 
-    def get_ksm_key_id(self) -> str:
+    def get_kms_key_id(self) -> str:
         return self._kms_key_id
 
 
@@ -119,7 +119,7 @@ def find_eth_signature(params: EthKmsParams, plaintext: bytes) -> dict:
     '''
     signature_schema = asn1tools.compile_string(SIGNATURE_ASN)
 
-    signature = sign_kms(params.get_ksm_key_id(), plaintext)
+    signature = sign_kms(params.get_kms_key_id(), plaintext)
 
     # https://tools.ietf.org/html/rfc3279#section-2.2.3
     signature_decoded = signature_schema.decode('Ecdsa-Sig-Value', signature['Signature'])

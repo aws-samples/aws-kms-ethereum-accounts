@@ -3,18 +3,20 @@
 This project represents an example implementation of an AWS customer master key (CMK) based Ethereum account.  
 It's implemented in AWS Cloud Development Kit (CDK) and Python.
 
-This repository contains all code artifacts for the following two blog posts:
+This repository contains all code artifacts for the following three blog posts:
+
 1. [Use Key Management Service (AWS KMS) to securely manage Ethereum accounts: Part 1](https://aws.amazon.com/blogs/database/part1-use-aws-kms-to-securely-manage-ethereum-accounts/)
 2. [Use Key Management Service (AWS KMS) to securely manage Ethereum accounts: Part 2](https://aws.amazon.com/blogs/database/part2-use-aws-kms-to-securely-manage-ethereum-accounts/)
-3. [EIP1559 Anyone](TODO)
+3. [How to sign Ethereum EIP-1559 transactions using AWS KMS](https://aws.amazon.com/blogs/database/how-to-sign-ethereum-eip-1559-transactions-using-aws-kms/)
 
 For a detailed explanation of how AWS Cloud Development Kit (CDK) can be used to create an AWS Key Management Service (KMS)
-based Ethereum account please have a look at the [first blog post](https://aws.amazon.com/blogs/database/part1-use-aws-kms-to-securely-manage-ethereum-accounts/).
+based Ethereum account please have a look at  the [first blog post](https://aws.amazon.com/blogs/database/part1-use-aws-kms-to-securely-manage-ethereum-accounts/).
 
-For a detailed explanation of the inner workings of Ethereum and how Ethereum signatures can be created using AWS KMS please 
-have a look ath the [second blog post](https://aws.amazon.com/blogs/database/part2-use-aws-kms-to-securely-manage-ethereum-accounts/).
+For a detailed explanation of the inner workings of Ethereum and how Ethereum signatures can be created using AWS KMS please have a look ath
+the [second blog post](https://aws.amazon.com/blogs/database/part2-use-aws-kms-to-securely-manage-ethereum-accounts/).
 
-
+For a detailed explanation of how EIP-1559 transactions can be created and signed using AWS KMS have a
+look at [How to sign Ethereum EIP-1559 transactions using AWS KMS](https://aws.amazon.com/blogs/database/how-to-sign-ethereum-eip-1559-transactions-using-aws-kms/).
 
 ## Deploying the solution with AWS CDK
 
@@ -32,15 +34,16 @@ have the following prerequisites:
 * [Configured AWS credentials](https://docs.aws.amazon.com/cdk/latest/guide/getting_started.html#getting_started_prerequisites)
 * Installed Node.js, Python 3, and pip. To install the example application:
 
-When working with Python, it’s good practice to use [venv](https://docs.python.org/3/library/venv.html#module-venv) to create project-specific virtual environments. 
-The use of `venv` also reflects AWS CDK standard behavior. 
-You can find out more in the workshop [Activating the virtualenv](https://cdkworkshop.com/30-python/20-create-project/200-virtualenv.html).
+When working with Python, it’s good practice to use [venv](https://docs.python.org/3/library/venv.html#module-venv) to
+create project-specific virtual environments. The use of `venv` also reflects AWS CDK standard behavior. You can find
+out more in the
+workshop [Activating the virtualenv](https://cdkworkshop.com/30-python/20-create-project/200-virtualenv.html).
 
 1. Install the CDK and test the CDK CLI:
     ```bash
     npm install -g aws-cdk && cdk --version
     ```
-   
+
 2. Download the code from the GitHub repo and switch in the new directory:
     ```bash
     git clone https://github.com/aws-samples/aws-kms-ethereum-accounts.git && cd aws-kms-ethereum-accounts
@@ -54,7 +57,6 @@ You can find out more in the workshop [Activating the virtualenv](https://cdkwor
     ```bash
     cdk deploy
     ```
-
 
 ## Cleaning up
 
@@ -70,11 +72,13 @@ cdk destroy
 ### Appendinx
 
 # Running Ethereum Accounts on AWS CMK
+The explanation below just covers the inner workings of Ethereum legacy transactions (pre. EIP-155/EIP1559).
+For an explanation of how EIP-155 or EIP-1559 transactions can be signed using AWS KMS please have a look at [How to sign Ethereum EIP-1559 transactions using AWS KMS](https://aws.amazon.com/blogs/database/how-to-sign-ethereum-eip-1559-transactions-using-aws-kms/).
 
 ## What is this about
 
-This repository represents a PoC of how Ethereum accounts (private/public key) can be hosted on AWS KMS-CMK and how
-AWS KMS can be used to create valid offline signatures on Ethereum transactions.
+This repository represents a PoC of how Ethereum accounts (private/public key) can be hosted on AWS KMS-CMK and how AWS
+KMS can be used to create valid offline signatures on Ethereum transactions.
 
 In this simple example, a transaction is created to send some Ether from one Ethereum account to another. For testing
 purposes it is recommended to use Ethereum Rinkeby (`https://www.rinkeby.io`) network for example and to create an
@@ -89,7 +93,7 @@ used (https://www.rinkeby.io/#faucet).
 
 1. The public key is being calculated and turned into an Ethereum checksum address.
     ```python
-    pub_key = get_kms_public_key(params.get_ksm_key_id())
+    pub_key = get_kms_public_key(params.get_kms_key_id())
     _logger.info('pub_key encoded: {}'.format(pub_key))
 
     eth_addr = calc_eth_address(pub_key)
@@ -132,9 +136,10 @@ used (https://www.rinkeby.io/#faucet).
 ## What are the Ethereum Foundations
 
 * Ethereum using ECDSA (Elliptic Curve Digital Signing Algorithm) standard `secp256k1`
-* `secp256k1` is supported by KMS `ECC_SECG_P256K1`
+* `secp256k1` is supported by AWS KMS `ECC_SECG_P256K1`
 
 ---------
+
 * https://cryptobook.nakov.com/asymmetric-key-ciphers/elliptic-curve-cryptography-ecc
 * https://en.bitcoin.it/wiki/Secp256k1
 
@@ -188,7 +193,7 @@ used (https://www.rinkeby.io/#faucet).
 
   [Deterministic Usage of the Digital Signature Algorithm (DSA) and Elliptic Curve Digital Signature Algorithm (ECDSA/RFC6979)](https://tools.ietf.org/html/rfc6979#section-3.2)
 
-  AWS KSM does not make use of DDSG (Deterministic Digital Signature Generation) in the signing operation right now.
+  AWS KMS does not make use of DDSG (Deterministic Digital Signature Generation) in the signing operation right now.
 
   Even differences in bitcoin library implementations: https://bitcoin.stackexchange.com/a/83785
 
@@ -238,6 +243,7 @@ used (https://www.rinkeby.io/#faucet).
     ```
 
 ----------
+
 * https://cryptobook.nakov.com/digital-signatures/ecdsa-sign-verify-messages
 * https://medium.com/mycrypto/the-magic-of-digital-signatures-on-ethereum-98fe184dc9c7
 
