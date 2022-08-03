@@ -1,0 +1,267 @@
+[
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {},
+      "authenticationInfo": {
+        "principalEmail": "p983569189036-377187@gcp-sa-logging.iam.gserviceaccount.com"
+      },
+      "requestMetadata": {
+        "callerSuppliedUserAgent": "BigstoreFile BigstoreIO (cr/446821003) ",
+        "requestAttributes": {
+          "time": "2022-08-02T18:10:30.714385405Z",
+          "reason": "8uSywAYeWhxCaWdzdG9yZS5HZXRXcml0YWJsZUJsb2JQYXRo",
+          "auth": {}
+        },
+        "destinationAttributes": {}
+      },
+      "serviceName": "storage.googleapis.com",
+      "methodName": "storage.objects.create",
+      "authorizationInfo": [
+        {
+          "resource": "projects/_/buckets/dark-forge-119908.appspot.com/objects/cloudaudit.googleapis.com/data_access/2022/08/02/17:00:00_17:59:59_S3.json",
+          "permission": "storage.objects.delete",
+          "granted": true,
+          "resourceAttributes": {}
+        },
+        {
+          "resource": "projects/_/buckets/dark-forge-119908.appspot.com/objects/cloudaudit.googleapis.com/data_access/2022/08/02/17:00:00_17:59:59_S3.json",
+          "permission": "storage.objects.create",
+          "granted": true,
+          "resourceAttributes": {}
+        }
+      ],
+      "resourceName": "projects/_/buckets/dark-forge-119908.appspot.com/objects/cloudaudit.googleapis.com/data_access/2022/08/02/17:00:00_17:59:59_S3.json",
+      "resourceLocation": {
+        "currentLocations": [
+          "eu"
+        ]
+      }
+    },
+    "insertId": "-x06p3me5bjrn",
+    "resource": {
+      "type": "gcs_bucket",
+      "labels": {
+        "project_id": "dark-forge-119908",
+        "location": "eu",
+        "bucket_name": "dark-forge-119908.appspot.com"
+      }
+    },
+    "timestamp": "2022-08-02T18:10:30.709785115Z",
+    "severity": "INFO",
+    "logName": "projects/dark-forge-119908/logs/cloudaudit.googleapis.com%2Fdata_access",
+    "receiveTimestamp": "2022-08-02T18:10:31.478003120Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {},
+      "authenticationInfo": {
+        "principalEmail": "p983569189036-377187@gcp-sa-logging.iam.gserviceaccount.com"
+      },
+      "requestMetadata": {
+        "callerSuppliedUserAgent": "BigstoreFile BigstoreIO (cr/446821003) ",
+        "requestAttributes": {
+          "time": "2022-08-02T18:09:23.226497283Z",
+          "reason": "8uSywAYeWhxCaWdzdG9yZS5HZXRXcml0YWJsZUJsb2JQYXRo",
+          "auth": {}
+        },
+        "destinationAttributes": {}
+      },
+      "serviceName": "storage.googleapis.com",
+      "methodName": "storage.objects.create",
+      "authorizationInfo": [
+        {
+          "resource": "projects/_/buckets/dark-forge-119908.appspot.com/objects/cloudaudit.googleapis.com/data_access/2022/08/02/17:00:00_17:59:59_S2.json",
+          "permission": "storage.objects.delete",
+          "granted": true,
+          "resourceAttributes": {}
+        },
+        {
+          "resource": "projects/_/buckets/dark-forge-119908.appspot.com/objects/cloudaudit.googleapis.com/data_access/2022/08/02/17:00:00_17:59:59_S2.json",
+          "permission": "storage.objects.create",
+          "granted": true,
+          "resourceAttributes": {}
+        }
+      ],
+      "resourceName": "projects/_/buckets/dark-forge-119908.appspot.com/objects/cloudaudit.googleapis.com/data_access/2022/08/02/17:00:00_17:59:59_S2.json",
+      "resourceLocation": {
+        "currentLocations": [
+          "eu"
+        ]
+      }
+    },
+    "insertId": "-wq69p2e6tn83",
+    "resource": {
+      "type": "gcs_bucket",
+      "labels": {
+        "project_id": "dark-forge-119908",
+        "bucket_name": "dark-forge-119908.appspot.com",
+        "location": "eu"
+      }
+    },
+    "timestamp": "2022-08-02T18:09:23.220588004Z",
+    "severity": "INFO",
+    "logName": "projects/dark-forge-119908/logs/cloudaudit.googleapis.com%2Fdata_access",
+    "receiveTimestamp": "2022-08-02T18:09:24.254917874Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {},
+      "authenticationInfo": {
+        "principalEmail": "p983569189036-377187@gcp-sa-logging.iam.gserviceaccount.com"
+      },
+      "requestMetadata": {
+        "callerSuppliedUserAgent": "BigstoreFile BigstoreIO (cr/446821003) ",
+        "requestAttributes": {
+          "time": "2022-08-02T18:09:13.852311220Z",
+          "reason": "8uSywAYeWhxCaWdzdG9yZS5HZXRXcml0YWJsZUJsb2JQYXRo",
+          "auth": {}
+        },
+        "destinationAttributes": {}
+      },
+      "serviceName": "storage.googleapis.com",
+      "methodName": "storage.objects.create",
+      "authorizationInfo": [
+        {
+          "resource": "projects/_/buckets/dark-forge-119908.appspot.com/objects/cloudaudit.googleapis.com/data_access/2022/08/02/17:00:00_17:59:59_S1.json",
+          "permission": "storage.objects.create",
+          "granted": true,
+          "resourceAttributes": {}
+        },
+        {
+          "resource": "projects/_/buckets/dark-forge-119908.appspot.com/objects/cloudaudit.googleapis.com/data_access/2022/08/02/17:00:00_17:59:59_S1.json",
+          "permission": "storage.objects.delete",
+          "granted": true,
+          "resourceAttributes": {}
+        }
+      ],
+      "resourceName": "projects/_/buckets/dark-forge-119908.appspot.com/objects/cloudaudit.googleapis.com/data_access/2022/08/02/17:00:00_17:59:59_S1.json",
+      "resourceLocation": {
+        "currentLocations": [
+          "eu"
+        ]
+      }
+    },
+    "insertId": "ivmmtcd2zhk",
+    "resource": {
+      "type": "gcs_bucket",
+      "labels": {
+        "location": "eu",
+        "bucket_name": "dark-forge-119908.appspot.com",
+        "project_id": "dark-forge-119908"
+      }
+    },
+    "timestamp": "2022-08-02T18:09:13.844567154Z",
+    "severity": "INFO",
+    "logName": "projects/dark-forge-119908/logs/cloudaudit.googleapis.com%2Fdata_access",
+    "receiveTimestamp": "2022-08-02T18:09:14.966186127Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {},
+      "authenticationInfo": {
+        "principalEmail": "p983569189036-377187@gcp-sa-logging.iam.gserviceaccount.com"
+      },
+      "requestMetadata": {
+        "callerSuppliedUserAgent": "BigstoreFile BigstoreIO (cr/446821003) ",
+        "requestAttributes": {
+          "time": "2022-08-02T18:08:14.366509921Z",
+          "reason": "8uSywAYeWhxCaWdzdG9yZS5HZXRXcml0YWJsZUJsb2JQYXRo",
+          "auth": {}
+        },
+        "destinationAttributes": {}
+      },
+      "serviceName": "storage.googleapis.com",
+      "methodName": "storage.objects.create",
+      "authorizationInfo": [
+        {
+          "resource": "projects/_/buckets/dark-forge-119908.appspot.com/objects/cloudaudit.googleapis.com/data_access/2022/08/02/17:00:00_17:59:59_S0.json",
+          "permission": "storage.objects.create",
+          "granted": true,
+          "resourceAttributes": {}
+        },
+        {
+          "resource": "projects/_/buckets/dark-forge-119908.appspot.com/objects/cloudaudit.googleapis.com/data_access/2022/08/02/17:00:00_17:59:59_S0.json",
+          "permission": "storage.objects.delete",
+          "granted": true,
+          "resourceAttributes": {}
+        }
+      ],
+      "resourceName": "projects/_/buckets/dark-forge-119908.appspot.com/objects/cloudaudit.googleapis.com/data_access/2022/08/02/17:00:00_17:59:59_S0.json",
+      "resourceLocation": {
+        "currentLocations": [
+          "eu"
+        ]
+      }
+    },
+    "insertId": "-45nzfae10s0d",
+    "resource": {
+      "type": "gcs_bucket",
+      "labels": {
+        "location": "eu",
+        "project_id": "dark-forge-119908",
+        "bucket_name": "dark-forge-119908.appspot.com"
+      }
+    },
+    "timestamp": "2022-08-02T18:08:14.356464191Z",
+    "severity": "INFO",
+    "logName": "projects/dark-forge-119908/logs/cloudaudit.googleapis.com%2Fdata_access",
+    "receiveTimestamp": "2022-08-02T18:08:14.954401739Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {},
+      "authenticationInfo": {
+        "principalEmail": "p983569189036-377187@gcp-sa-logging.iam.gserviceaccount.com"
+      },
+      "requestMetadata": {
+        "callerSuppliedUserAgent": "BigstoreFile BigstoreIO (cr/446821003) ",
+        "requestAttributes": {
+          "time": "2022-08-02T18:07:54.289200160Z",
+          "reason": "8uSywAYeWhxCaWdzdG9yZS5HZXRXcml0YWJsZUJsb2JQYXRo",
+          "auth": {}
+        },
+        "destinationAttributes": {}
+      },
+      "serviceName": "storage.googleapis.com",
+      "methodName": "storage.objects.create",
+      "authorizationInfo": [
+        {
+          "resource": "projects/_/buckets/dark-forge-119908.appspot.com/objects/bigquerydatatransfer.googleapis.com/transfer_config/2022/08/02/17:00:00_17:59:59_S0.json",
+          "permission": "storage.objects.create",
+          "granted": true,
+          "resourceAttributes": {}
+        },
+        {
+          "resource": "projects/_/buckets/dark-forge-119908.appspot.com/objects/bigquerydatatransfer.googleapis.com/transfer_config/2022/08/02/17:00:00_17:59:59_S0.json",
+          "permission": "storage.objects.delete",
+          "granted": true,
+          "resourceAttributes": {}
+        }
+      ],
+      "resourceName": "projects/_/buckets/dark-forge-119908.appspot.com/objects/bigquerydatatransfer.googleapis.com/transfer_config/2022/08/02/17:00:00_17:59:59_S0.json",
+      "resourceLocation": {
+        "currentLocations": [
+          "eu"
+        ]
+      }
+    },
+    "insertId": "-k8rt2vebpp4s",
+    "resource": {
+      "type": "gcs_bucket",
+      "labels": {
+        "bucket_name": "dark-forge-119908.appspot.com",
+        "location": "eu",
+        "project_id": "dark-forge-119908"
+      }
+    },
+    "timestamp": "2022-08-02T18:07:54.281772510Z",
+    "severity": "INFO",
+    "logName": "projects/dark-forge-119908/logs/cloudaudit.googleapis.com%2Fdata_access",
+    "receiveTimestamp": "2022-08-02T18:07:54.728055097Z"
+  }
+]

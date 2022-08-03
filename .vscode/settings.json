@@ -1,0 +1,14 @@
+{
+    "editor.renderWhitespace": "all",
+    "editor.wordWrap": "on",
+    "editor.autoClosingQuotes": "always",
+    "editor.bracketPairColorization.enabled": true,
+    "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
+    "editor.columnSelection": true,
+    "editor.definitionLinkOpensInPeek": true,
+    "editor.gotoLocation.alternativeReferenceCommand": "editor.action.goToImplementation",
+    "editor.guides.bracketPairs": true,
+    "editor.gotoLocation.multipleTypeDefinitions": "gotoAndPeek",
+    "editor.inlayHints.fontSize": 10,
+    "editor.linkedEditing": true
+}
