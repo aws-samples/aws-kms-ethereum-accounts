@@ -75,7 +75,7 @@ def sign_kms(key_id: str, msg_hash: bytes) -> dict:
     return response
 
 
-def calc_eth_address(pub_key) -> str:
+def calc_eth_address(pub_key: bytes) -> str:
     SUBJECT_ASN = '''
     Key DEFINITIONS ::= BEGIN
 
@@ -134,7 +134,7 @@ def find_eth_signature(params: EthKmsParams, plaintext: bytes) -> dict:
     return {'r': r, 's': s}
 
 
-def get_recovery_id(msg_hash, r, s, eth_checksum_addr) -> dict:
+def get_recovery_id(msg_hash: bytes, r: int, s: int, eth_checksum_addr: str) -> dict:
     for v in [27, 28]:
         recovered_addr = Account.recoverHash(message_hash=msg_hash,
                                              vrs=(v, r, s))

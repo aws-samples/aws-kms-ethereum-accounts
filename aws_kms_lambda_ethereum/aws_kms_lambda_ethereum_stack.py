@@ -1,33 +1,35 @@
 #  Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #  SPDX-License-Identifier: MIT-0
 
-from aws_cdk import (core,
+from aws_cdk import (Stack,
+                     Duration,
+                     CfnOutput,
+                     BundlingOptions,
+                     RemovalPolicy,
                      aws_lambda,
                      aws_kms
                      )
+from constructs import Construct
 
 
-class EthLambda(core.Construct):
+class EthLambda(Construct):
 
     def __init__(self,
-                 scope: core.Construct,
+                 scope: Construct,
                  id: str,
                  dir: str,
                  env: dict
                  ):
         super().__init__(scope, id)
 
-        bundling_docker_image = core.BundlingDockerImage.from_registry(
-            "lambci/lambda:build-python3.8"
-        )
-
         commands = [
             "if [[ -f requirements.txt ]]; then pip install --target /asset-output -r requirements.txt; fi",
             "cp --parents $(find . -name '*.py') /asset-output"
         ]
 
-        bundling_config = core.BundlingOptions(
-            image=bundling_docker_image, command=["bash", "-xe", "-c", " && ".join(commands)]
+        bundling_config = BundlingOptions(
+            image=aws_lambda.Runtime.PYTHON_3_9.bundling_image,
+            command=["bash", "-xe", "-c", " && ".join(commands)]
         )
 
         code = aws_lambda.Code.from_asset(
@@ -38,9 +40,9 @@ class EthLambda(core.Construct):
             self,
             "Function",
             handler="lambda_function.lambda_handler",
-            runtime=aws_lambda.Runtime.PYTHON_3_8,
+            runtime=aws_lambda.Runtime.PYTHON_3_9,
             environment=env,
-            timeout=core.Duration.minutes(2),
+            timeout=Duration.minutes(2),
             code=code,
             memory_size=256
         )
@@ -48,13 +50,13 @@ class EthLambda(core.Construct):
         self.lf = lf
 
 
-class AwsKmsLambdaEthereumStack(core.Stack):
+class AwsKmsLambdaEthereumStack(Stack):
 
-    def __init__(self, scope: core.Construct, construct_id: str, eth_network: str = 'rinkeby', **kwargs) -> None:
+    def __init__(self, scope: Construct, construct_id: str, eth_network: str = 'rinkeby', **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
 
         cmk = aws_kms.Key(self, "eth-cmk-identity",
-                          removal_policy=core.RemovalPolicy.DESTROY)
+                          removal_policy=RemovalPolicy.DESTROY)
         cfn_cmk = cmk.node.default_child
         cfn_cmk.key_spec = 'ECC_SECG_P256K1'
         cfn_cmk.key_usage = 'SIGN_VERIFY'
@@ -81,5 +83,5 @@ class AwsKmsLambdaEthereumStack(core.Stack):
         cmk.grant(eth_client_eip1559.lf, 'kms:GetPublicKey')
         cmk.grant(eth_client_eip1559.lf, 'kms:Sign')
 
-        core.CfnOutput(self, 'KeyID', value=cmk.key_id,
-                       description="KeyID of the KMS-CMK instance used as the Ethereum identity instance")
+        CfnOutput(self, 'KeyID', value=cmk.key_id,
+                  description="KeyID of the KMS-CMK instance used as the Ethereum identity instance")

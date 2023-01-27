@@ -38,7 +38,6 @@ def lambda_handler(event, context):
 
         return {'eth_checksum_address': eth_checksum_address}
 
-
     # {"operation": "send",
     #  "amount": 123,
     #  "dst_address": "0x...",
