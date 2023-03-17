@@ -7,7 +7,8 @@ from aws_cdk import (Stack,
                      BundlingOptions,
                      RemovalPolicy,
                      aws_lambda,
-                     aws_kms
+                     aws_kms,
+                     DockerImage
                      )
 from constructs import Construct
 
@@ -28,7 +29,7 @@ class EthLambda(Construct):
         ]
 
         bundling_config = BundlingOptions(
-            image=aws_lambda.Runtime.PYTHON_3_9.bundling_image,
+            image=DockerImage("public.ecr.aws/sam/build-python3.9:latest-x86_64"),
             command=["bash", "-xe", "-c", " && ".join(commands)]
         )
 
