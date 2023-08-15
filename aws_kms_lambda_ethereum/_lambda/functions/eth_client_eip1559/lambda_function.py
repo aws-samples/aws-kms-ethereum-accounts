@@ -58,6 +58,8 @@ def lambda_handler(event, context):
         amount = event.get('amount')
 
         nonce = event.get('nonce')
+        # get the call data
+        data = event.get('data')
 
         # optional params
         chainid = event.get('chainid')
@@ -78,7 +80,8 @@ def lambda_handler(event, context):
                                   chainid=chainid,
                                   type=type,
                                   max_fee_per_gas=max_fee_per_gas,
-                                  max_priority_fee_per_gas=max_priority_fee_per_gas)
+                                  max_priority_fee_per_gas=max_priority_fee_per_gas,
+                                  data=data)
 
         # assemble Ethereum transaction and sign it offline
         raw_tx_signed_hash, raw_tx_signed_payload = assemble_tx(tx_params=tx_params,
