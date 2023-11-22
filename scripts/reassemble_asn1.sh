@@ -9,14 +9,14 @@ raw_key=$1
 
 ASN1_PRIV_KEY_HEADER="302e0201010420"
 ASN1_SECP256K1_OID="a00706052b8104000a"
-OUT_FILE="priv_key.pem"
+OUT_FILE="priv_key.der"
 
 if [ -z "${raw_key}" ]; then
   echo "Usage: $1 $0 <private_key>"
   exit 1
 fi
 
-openssl ec -inform DER -out "${OUT_FILE}" -in <(echo "${ASN1_PRIV_KEY_HEADER} ${raw_key} ${ASN1_SECP256K1_OID}" | xxd -r -p) &>/dev/null
+openssl ec -inform DER -outform DER -out "${OUT_FILE}" -in <(echo "${ASN1_PRIV_KEY_HEADER} ${raw_key} ${ASN1_SECP256K1_OID}" | xxd -r -p) &>/dev/null
 printf "private key successfully written to: %s\n" "${OUT_FILE}"
 
 #printf "asn1parse output:\n"
